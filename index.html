@@ -1,0 +1,780 @@
+<!-- Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recommendation Evidence Generation Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"
+    integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100vh;
+      background-image: url('');
+      background-size: cover;
+
+    }
+
+    .frosted-glass {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(3.3rem);
+      filter: grayscale(0.8);
+
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+
+    }
+
+    .content {
+      position: absolute;
+      top: 55%;
+      left: 55%;
+      transform: translate(-55%, -55%);
+      z-index: 1;
+
+    }
+
+
+    .dropdown-menu {
+      background-color: #21252925;
+
+      position: absolute;
+      overflow: auto;
+      max-height: 50vh;
+
+    }
+
+    .dropdown-item {
+      background-color: #21252925;
+    }
+
+    .dropdown-item> :hover {
+      background-color: #ffffffdd;
+      cursor: pointer;
+    }
+
+    .dropdown-item {
+      max-height: 500px;
+      ;
+    }
+
+    .dropdown-menu>li:hover {
+      background-color: #21252925;
+    }
+
+    .one-line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .four-line {
+      line-height: 1.5em;
+      height: 4em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
+        Recomendation Evidence Generation Demo
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Start Over</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cite this demo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">AWS AI Labs</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="frosted-glass"></div>
+
+  <div class="container-fluid grid content" style="z-index: 1;">
+
+    <div class="row p-5" style="height: 100vh; min-height: 100vh;">
+
+      <div class="col grid p-0 m-0 ">
+        <!-- Title  -->
+        <div class="d-flex flex-row align-items-end m-3 " style="height: 50vh; min-width: 25%;">
+
+          <div class="p-3 rounded-3 bg-dark bg-opacity-50" style="width: 100%;">
+
+            <div class="d-flex w-100">
+              <h5 class="col-md-6 p-2 text-white d-flex justify-content-start w-50">Recommended &nbsp;<span
+                  id="domain_name"></span></h5>
+              <div class="p-2 text-white d-flex justify-content-end float-end w-50 ">
+
+                <!-- Dropdown start here -->
+                <div class="dropdown">
+                  <button id="change_title" class="btn btn-success px-5 ms-5
+                    dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Select a different item
+                  </button>
+                  <ul id="select_item" class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+
+
+                  </ul>
+
+
+                </div>
+                <!-- dropdown ends here -->
+              </div>
+
+
+            </div>
+
+            <img id="item_image" style="width: 100px; float: left;" class="mx-2 p-0 border border-2 border-white "
+              src="">
+
+
+            <h1 id="item_title" class="text-white mb-auto p-2"></h1>
+            <span class="badge text-bg-primary">
+              <h6 id="item_tag_1" class="p-0 m-0"></h6>
+            </span>
+            <span class="badge text-bg-primary">
+              <h6 id="item_tag_2" class="p-0 m-0"></h6>
+            </span>
+            <span class="badge text-bg-primary">
+              <h6 id="item_tag_3" class="p-0 m-0"></h6>
+            </span>
+
+            <nav aria-label="breadcrumb" class="m-2">
+              <ol class="breadcrumb text-white">
+                <li id="item_meta_1" class="breadcrumb-item"></li>
+                <li id="item_meta_2" class="breadcrumb-item"></li>
+                <li id="item_meta_3" class="breadcrumb-item"></li>
+              </ol>
+            </nav>
+
+            <hr>
+
+            <figure class="text-white p-3 mt-3 mb-0">
+              <blockquote class="blockquote">
+                <p id="item_desc" class="lead small"></p>
+              </blockquote>
+              <figcaption class="blockquote-footer text-white">
+                Source: <cite title="Source Title">IMDB</cite>
+              </figcaption>
+            </figure>
+          </div>
+
+        </div>
+
+        <!-- Explanation -->
+        <div class="row m-3 align-items-start">
+
+          <div class="container p-0">
+            <div class="p-4 text-left bg-dark bg-opacity-50 rounded-3">
+              <h4 class="text-white">Recommendation Evidence&nbsp;<span class="small fs-5 fw-light" id="usecase">(Example 1)</span></h4>
+
+              <p id="evidence_text" class=" col-md-12 text-white lead ">
+
+              </p>
+
+              <div class="row mt-1">
+                <button id="pos_feedback"
+                  class=" col-md-3 mx-2  align-items-left btn btn-sm btn-success btn-lg px-2 rounded-pill"
+                  type="button">
+                  This is helpful 👍
+                </button>
+
+                <button id="neg_feedback"
+                  class=" col-md-3 mx-2 align-items-left btn btn-sm btn-secondary btn-lg px-2 rounded-pill"
+                  type="button">
+                  Needs improvment
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col grid p-0 m-0">
+        <!-- Settings  -->
+        <div class="d-flex flex-row align-items-end my-3 " style="height: 50vh; min-width: 25%; float: left;">
+
+          <div class="container p-0">
+            <div class="p-3 text-left bg-dark bg-opacity-50 rounded-3">
+
+              <div class="d-flex w-100">
+                <h5 class="p-2 text-white d-flex justify-content-start w-50">User Interaction History</h5>
+                <div class="p-2 text-white d-flex justify-content-end float-end w-50"></div>
+
+                <h5 id="example" class="btn btn-sm btn-primary w-25 p-2 m-1">Try another example</h5>
+              </div>
+
+              <p class="text-white p-1 m-1">Relevant item from the user interaction history: This collection shows a
+                small subset of items from the user history that have the highest relevance to the recommended item.</p>
+<div class="row-fluid">
+              <div id="user_history" class="container-fluid d-inline-flex gap-2 mb-2 mt-2">
+
+                <div id="0" class="pop col-sm-2 text-center" data-toggle="popover">
+                  <img id="hist_image_1" style="width: 100px; height: 150px;"
+                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                  <p id="hist_title_1" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                </div>
+
+                <div id="1" class="pop col-sm-2 text-center" data-toggle="popover">
+                  <img id="hist_image_2" style="width: 100px; height: 150px; "
+                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                  <p id="hist_title_2" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                </div>
+
+                <div id="2" class="pop col-sm-2 text-center" data-toggle="popover">
+                  <img id="hist_image_3" style="width: 100px; height: 150px; "
+                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                  <p id="hist_title_3" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                </div>
+
+                <div id="3" class="pop col-sm-2 text-center" data-toggle="popover">
+                  <img id="hist_image_4" style="width: 100px; height: 150px; "
+                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                  <p id="hist_title_4" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                </div>
+
+                <div id="4" class="pop col-sm-2 text-center" data-toggle="popover">
+                  <img id="hist_image_5" style="width: 100px; height: 150px;"
+                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                  <p id="hist_title_5" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                </div>
+
+              </div>
+              </div>
+              <p class="text-white m-0 p-0 small fw-light">ⓘ Learn how we find the most relevant items from the user
+                history.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Watch History -->
+        <div class="d-flex flex-row  align-items-start " style="width: 100%;">
+          <div class="p-3 rounded-3 bg-dark bg-opacity-50" style="width: 100%;">
+            <h6 class="text-white">Explanation Settings</h6>
+            <div
+              class="dropdown-menu overflow-auto position-static d-flex flex-column flex-lg-row align-items-stretch justify-content-start p-3 mb-0 rounded-3 shadow-lg"
+              data-bs-theme="dark" style="opacity: 0.7;">
+              <nav class="col-lg-8">
+                <ul class="list-unstyled d-flex flex-column gap-1 mb-1">
+                  <li>
+                    <a id="model" href="#"
+                      class="model_select btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-0 px-0 lh-sm text-start">
+                      <img src="images/model.png" class="bi" width="48" height="48" style="background: rgba(255, 255, 255, 0.15);"></img>
+                      <div>
+                        <strong class="d-block text-white">Logic Scaffolding Model</strong>
+                        <small>Falcon-40b : Technology Innovation Institute (TII)</small>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a id="zero" href="#"
+                      class="model_select btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-0 px-0 lh-sm text-start active">
+                      <img src="images/zero.png" class="bi" width="48" height="48" style="background: rgba(255, 255, 255, 0.15);"></img>
+                      <div>
+                        <strong class="d-block">Zero-shot Model</strong>
+                        <small>Falcon-40b : Technology Innovation Institute (TII)</small>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <!-- <div class="form-check form-switch m-0 p-0 ms-5 ">
+                  <input class="form-check-input " type="checkbox" role="switch" id="finetune" checked >
+                  <label class="form-check-label" for="finetune">Fine-tuned model</label>
+                </div> -->
+              </nav>
+              <div class="d-none d-lg-block vr mx-4 opacity-10">&nbsp;</div>
+              <hr class="d-lg-none">
+              <div class="col-lg-auto pe-3">
+                <nav>
+                  <ul class="d-flex flex-column gap-2 list-unstyled small ">
+                    <li><a href="#"
+                        class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Documentation</a>
+                    </li>
+                    <li><a href="#"
+                        class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Data Privacy</a></li>
+                    <li><a href="#"
+                        class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">API
+                        status</a></li>
+                    <li><a href="#"
+                        class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Publication</a>
+                    </li>
+
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+    <nav class="navbar navbar-expand-sm bg-body-tertiary fixed-bottom" data-bs-theme="dark">
+      <h5 class="text-white"></h5>
+    </nav>
+  </div>
+
+  <div id="my_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        ...
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+    integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+
+  <script>
+    options = window.localStorage;
+
+    //basics
+    options.setItem('item_data', '');
+    options.setItem('domain', 'movies');
+    options.setItem('first', 'true');
+
+    options.setItem('id', Math.random().toString(36).substring(7));
+    options.setItem('item', '0068646');
+
+    options.setItem('history', '0086250,0099685,0113277,0112641,0042876');
+
+    options.setItem('model', 'zero');
+    options.setItem('finetune', 'false');
+
+    options.setItem('ex', '1');
+
+  </script>
+
+  <script>
+
+    // function typewriter(text) {
+    //   var i = 0;
+    //   var interval = setInterval(function() {
+    //     document.getElementById("evidence_text").innerHTML += text[i++];
+    //     if (i === text.length) {
+    //       clearInterval(interval);
+    //     }
+    //   }, 60);
+    // }
+
+    // function typewriter(text, speed = 50) {
+    //   let index = 0;
+    //   const outputElement = document.getElementById('evidence_text'); 
+    //   outputElement.innerHTML = ''; 
+
+    //   function type() {
+    //     if (index < text.length) {
+    //       outputElement.innerHTML += text.charAt(index);
+    //       index++;
+    //       setTimeout(type, speed);
+    //     }
+    //   }
+    //   type();
+    // }
+
+    function typewriter(text, speed = 50) {
+      let index = 0;
+      const outputElement = document.getElementById('evidence_text'); // Change 'output' to your output element's ID
+      outputElement.innerHTML = '';
+
+
+      const typeInterval = setInterval(() => {
+        if (index < text.length) {
+          outputElement.innerHTML += text.charAt(index);
+          index++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }, speed);
+    }
+
+
+
+    function load_items() {
+
+      var path = "../data/" + options.getItem('domain') + ".json"
+      $.ajax({
+        url: './apis/itemdata.php?url=' + path,
+        type: 'post',
+        async: false,
+        success: function (response) {
+          if (response != 0) {
+            options.setItem('item_data', response);
+            console.log("Ok");
+          } else {
+            console.log("Error");
+          }
+        },
+      });
+      return options.getItem('item_data');
+    }
+
+    function populate_item_dropdown() {
+      var data = load_items();
+      json_data = JSON.parse(data);
+      //console.log(json_data);
+
+      for (var key in json_data) {
+        if (json_data.hasOwnProperty(key)) {
+
+          var title = json_data[key].title;
+          var desc = json_data[key].desc;
+          var image = json_data[key].image;
+
+
+          var new_li = '<li class="dropdown-item" value="' + key + '"> <div class="card mb-1 col-md-12"> <div class="row g-0"> <div class="col-3 me-0"> <img src="' + image + '" class="img-fluid rounded-start" alt="..."> </div> <div class="col-md-8 mx-1"> <div class="card-body p-0 pt-1"> <h6 class="card-title text mb-1 one-line">' + title + '</h6> <p class="card-text text-truncate justify text-secondary fw-light lh-1  text-wrap small mb-1 four-line"> ' + desc + '</p> </div> </div> </div> </div> </li>';
+
+          $('#select_item').append(new_li);
+
+        }
+      }
+    }
+
+    function load_with_data() {
+      var domain = options.getItem('domain');
+
+      var id = options.getItem('id');
+      var item = options.getItem('item');
+      var history = '';
+      if(item == '1398018'){
+        history = '0253474,0118799,0120815,0114814,0169547';
+        options.setItem('history',history);
+      }
+      if(item == '2131456'){
+
+        history = '0137523,0208092,0109830,0066921,0118715';
+        options.setItem('history',history);
+      }
+      if(item == '0068646'){
+        history = '0086250,0099685,0113277,0112641,0042876';
+        options.setItem('history',history);
+      }
+      //var history = options.getItem('history'); 
+
+      console.log(item);
+      console.log(history);
+
+      
+      var model = options.getItem('model');
+      var finetune = options.getItem('finetune');
+      var ex = options.getItem('ex');
+
+      display_item(item);
+      display_history(history);
+      display_settings(model, finetune);
+      update_evidence(item, history, model, finetune, ex);
+
+
+    }
+
+    function display_item(item) {
+
+      $.ajax({
+        url: './apis/details.php?item=' + item + "&domain=" + options.getItem('domain'),
+        type: 'post',
+        async: false,
+        success: function (response) {
+          if (response != 0) {
+
+            var json_data = JSON.parse(response);
+
+            var title = json_data.title;
+            var desc = json_data.desc;
+            var image = json_data.image;
+            var meta_1 = json_data.meta_1;
+            var meta_2 = json_data.meta_2;
+            var meta_3 = json_data.meta_3;
+            var tag_1 = json_data.tag_1;
+            var tag_2 = json_data.tag_2;
+            var tag_3 = json_data.tag_3;
+
+            $('#item_title').text(title);
+
+
+            $('#item_desc').text(desc);
+            $('#item_image').attr("src", image);
+
+            $('body').css("background-image", 'url(' + image + ')').delay(500).fadeIn('slow');
+
+            $('#item_tag_1').text(tag_1);
+            $('#item_tag_2').text(tag_2);
+            $('#item_tag_3').text(tag_3);
+
+            $('#item_meta_1').text(meta_1);
+            $('#item_meta_2').text(meta_2);
+            $('#item_meta_3').text(meta_3);
+
+            console.log("Ok");
+
+          } else {
+            console.log("Error");
+          }
+        },
+      });
+    }
+
+    function display_history(history) {
+
+      $.ajax({
+        url: './apis/history.php?history=' + history + '&domain=' + options.getItem("domain"),
+        type: 'post',
+        async: false,
+        success: function (response) {
+          if (response != 0) {
+            var json_data = JSON.parse(response);
+
+
+            $('#hist_title_1').text(json_data[0]['item_title']);
+            $('#hist_image_1').attr("src", json_data[0]['item_image']);
+            $('#hist_1').prop("content", json_data[0]['item_title']);
+
+
+            $('#hist_title_2').text(json_data[1]['item_title']);
+            $('#hist_image_2').attr("src", json_data[1]['item_image']);
+
+            $('#hist_title_3').text(json_data[2]['item_title']);
+            $('#hist_image_3').attr("src", json_data[2]['item_image']);
+
+            $('#hist_title_4').text(json_data[3]['item_title']);
+            $('#hist_image_4').attr("src", json_data[3]['item_image']);
+
+            $('#hist_title_5').text(json_data[4]['item_title']);
+            $('#hist_image_5').attr("src", json_data[4]['item_image']);
+
+
+          } else {
+            console.log("Error");
+          }
+        },
+      });
+    }
+
+    function display_settings(model, finetune) {
+
+      if (model == 'zero') {
+        $('#zero').addClass('active');
+        $('#model').removeClass('active');
+      } else {
+        $('#zero').removeClass('active');
+        $('#model').addClass('active');
+      }
+
+      if (finetune == 'true') {
+        $("#finetune").prop("checked");
+
+      } else {
+        $("#finetune").prop("checked", false);
+      }
+    }
+
+    function update_evidence(item, history, model, finetune, ex) {
+
+      $('#evidence_text').text("");
+      //$('#evidence_text').removeClass('typewriter');
+
+      var url = './apis/evidence.php?item=' + item + '&history=' + history + '&model=' + model + '&finetune=' + finetune + '&domain=' + options.getItem('domain') + '&ex=' + ex ;
+      console.log(url);
+      $.ajax({
+        url: url,
+        type: 'post',
+        async: false,
+        success: function (response) {
+          if (response != 0) {
+
+            var json_data = JSON.parse(response);
+
+            $('#evidence_text').text("");
+            var evid = json_data['evidence'];
+            $('#evidence_text').html(evid);
+            $('#usecase').text("(Example "+ex+")");
+
+            $('#evidence_text').hide().fadeIn(500);
+
+            options.setItem("evidence", json_data['evidence']);
+            options.setItem("ex", json_data['ex']);
+
+          } else {
+            console.log("Error");
+            
+          }
+        },
+      });
+    }
+
+    function save_feedback(type) {
+
+      var id = options.getItem('id');
+
+      $.ajax({
+        url: './apis/feedback.php?id=' + id + '&feedback=' + type + '&rating=5',
+        type: 'post',
+        async: false,
+        success: function (response) {
+          if (response != 0) {
+            console.log("Feedback Saved");
+          } else {
+            console.log("Error");
+          }
+        },
+      });
+
+    }
+
+    function get_item_popup(id) {
+
+      var history = options.getItem('history');
+      //console.log(history);
+      hist_arr = history.split(',');
+      item_id = hist_arr[id];
+
+      var item = "0".repeat(7 - (item_id.toString()).length) + item_id.toString();
+
+      var data = options.getItem('item_data');
+      json_data = JSON.parse(data);
+      return '<h6>' + json_data[item]['title'] + '</h6><p>' + json_data[item]['desc'] + '</p>';
+    }
+
+
+
+  </script>
+  <script>
+
+    $(document).ready(function () {
+      load_items();
+
+
+      populate_item_dropdown();
+
+      $('#domain_name').text(options.getItem('domain').slice(0, -1));
+
+
+      load_with_data();
+      $(".dropdown-item").click(function () {
+        var item = "0".repeat(7 - (this.value.toString()).length) + this.value.toString();
+        options.setItem('item', item);
+        load_with_data();
+      });
+
+      $(".model_select").click(function () {
+        options.setItem('model', this.id);
+        load_with_data();
+      });
+
+      // $(".pop").hover(function () {
+      //   //var desc = get_item_popup($(this).attr('id'));
+
+        
+      //   $('[data-toggle="popover"]').each(function () {
+      //   //alert(get_item_popup($(this).attr('id')));
+      //   $(this).popover({
+      //     placement: 'top',
+      //     trigger: 'hover',
+      //     html: true,
+      //     content: get_item_popup($(this).attr('id'))
+      //   });
+      // });
+
+      // });
+
+
+
+
+
+      $("#example").click(function () {
+        current = parseInt(options.getItem('ex'));
+        if(current <= 3){
+          options.setItem('ex', (current+1).toString() );
+        }else{
+          options.setItem('ex','1');
+        }
+        load_with_data();
+      });
+
+      
+
+      $('#finetune').change(function () {
+        if ($(this).is(':checked')) {
+          $("#finetune").prop("checked");
+          options.setItem('finetune', 'true');
+          load_with_data();
+        } else {
+          $("#finetune").prop("checked", false);
+          options.setItem('finetune', 'false');
+          load_with_data();
+        }
+      });
+
+
+      $("#pos_feedback").click(function () {
+        save_feedback('positive');
+      });
+
+      $("#neg_feedback").click(function () {
+        save_feedback('negative');
+      });
+
+
+    });
+
+  </script>
+
+</body>
+
+</html>

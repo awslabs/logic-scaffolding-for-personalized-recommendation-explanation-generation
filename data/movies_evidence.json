@@ -1,0 +1,202 @@
+[
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Considering your viewing record, you might find Schindler's List appealing due to its fusion of Holocaust Drama and Neo-Noir Heroics, much like The Pianist and Life Is Beautiful from your history of watched films.",
+        "ex":"1"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"The recommended movie, Schindler's List, is a powerful and moving film that tells the true story of Oskar Schindler, a German businessman who saved the lives of over 5,000 Jews during the Holocaust. The movie is a testament to the resilience of the human spirit and the importance of standing up against injustice.",
+        "ex":"1"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Taking into account your viewing background, you might find Schindler's List appealing as it combines Holocaust Drama and Neo-Noir Heroics, much like The Pianist and Life Is Beautiful from your previously watched films.",
+        "ex":"2"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"Schindler's List is a highly acclaimed and emotionally impactful film that sheds light on the atrocities of the Holocaust and the power of human resilience.",
+        "ex":"2"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Considering your viewing preferences, you may appreciate 'Schindler's List' for its blend of Holocaust drama and neo-noir heroics, reminiscent of films you've enjoyed before, such as 'The Pianist' and 'Life Is Beautiful.'",
+        "ex":"3"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"1. The topic of the Holocaust is relevant and historically significant, making it a worthwhile subject to explore through film. </br> 2. Schindler's List is considered a classic film with high production values and an acclaimed performance by Liam Neeson.<br> 3. The themes of the film such as redemption, sacrifice",
+        "ex":"3"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Based on your watching history, you may enjoy watching Schindler's List because it blends the sub-genres of Holocaust Drama and Neo-Noir Heroics, similar to The Pianist and Life Is Beautifuy from your watching history.",
+        "ex":"4"
+    },
+    {
+        "item":"1398018",
+        "history":"0253474,0118799,0120815,0114814,0169547",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"1. Schindler's List - Recommended for the powerful historical context and emotional journey it takes viewers on, as well as the message of hope and humanity amidst the darkest times.",
+        "ex":"4"
+    }
+
+    ,
+
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Based on your watching history, you may enjoy watching Pulp Fiction because it combines the elements of dark humor and neo-noir, similar to Fight Club and Snatch, which you have previously enjoyed.",
+        "ex":"1"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"A classic film featuring iconic performances by some of Hollywood’s greatest actors such as Brad Pitt, Edward Norton, Robert De Niro, Helena Bonham Carter, Christopher Walken, John Travolta, Samuel L Jackson, Bruce Willis among others; this crime thriller has been hailed as Tarantino at his best!",
+        "ex":"1"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"According to your viewing preferences, Pulp Fiction might capture your interest as it combines elements of Dark Comedy and Neo-Noir, much like Fight Club and Snatch, both of which you've previously watched.",
+        "ex":"2"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"Pulp fiction offers thrilling action scenes combined with complex character development which makes it worth every minute spent on screen.",
+        "ex":"2"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Given your viewing preferences, Pulp Fiction could be a captivating choice, as it combines elements of Dark Comedy and Neo-Noir, much like Fight Club and Snatch, both of which you've enjoyed in the past.",
+        "ex":"3"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"'Pulp fiction', directed by Quentin Tarantino combines classic film noir elements such as crime drama themes along side modern day humor making this cult favorite must watch.</li></ol><br/><h2 class='section'>3) What other factors could we consider when recommending new content?</h1>&lt;ul&gt;&lilist style=margin:-10px;-20pt;' id='_x000C_id18'><span lang='' xml:'title=''>",
+        "ex":"3"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Based on your previous viewing history, you may enjoy watching Pulp Fiction because it combines the sub-genres of dark comedy and neo-noir, similar to Fight Club and Snatch.",
+        "ex":"4"
+    },
+    {
+        "item":"2131456",
+        "history":"0137523,0208092,0109830,0066921,0118715",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"Pulp fiction combines classic noir storytelling elements such as crime drama themes like revenge or betrayal while also exploring modern cultural references.",
+        "ex":"4"
+    }
+
+    ,
+
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Based on your viewing history, you may enjoy watching The Godfather because it combines the elements of gangster drama and family epic, similar to Scarface and Goodfellas, which you have previously enjoyed.",
+        "ex":"2"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"Based on our analysis so far we can suggest you watch Scarace which is also an epic crime saga like GoodFella but has more action scenes than drama.",
+        "ex":"2"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"You might find yourself enjoying a classic gangster drama like The Godfather based on past viewing habits that include other popular films in this genre such as Scarface and Goodfellas.",
+        "ex":"1"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"The Godfather is a classic film that has stood the test of time and is widely regarded as one of the greatest movies ever made. It features an iconic performance by Marlon Brando and a gripping storyline that explores themes of family, loyalty, and power.",
+        "ex":"1"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Based on your watching history, you may enjoy watching The Godfather because it blends the sub-genres of Gangster Drama and Family Epic, similar to Scarface and Goodfellas from your watching history.",
+        "ex":"3"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"<ul style='margin-left:-20px; margin-top:.25rem;'> <li>Action/Adventure;</li> <li>Comedy;</li> <li>Romance;</li> <li>Science Fiction/Fantasy;</li> <li>Thriller/Suspense;</li> </ul> &nbsp;&lt;/div&gt; <br/>",
+        "ex":"3"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"model",
+        "finetune":"false",
+        "evidence":"Based on your viewing history, you may enjoy watching The Godfather because it combines the elements of Gangster Drama and Family Epic, similar to Scarface and Goodfellas, which you have previously watched.",
+        "ex":"4"
+    },
+    {
+        "item":"0068646",
+        "history":"0086250,0099685,0113277,0112641,0042876",
+        "model":"zero",
+        "finetune":"false",
+        "evidence":"The recommendation is based on similar genres or themes that have been previously watched by users who also enjoyed this particular film.",
+        "ex":"4"
+    }
+
+
+]
