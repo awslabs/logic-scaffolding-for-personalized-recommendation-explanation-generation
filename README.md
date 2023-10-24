@@ -1,11 +1,6 @@
-## My Project
-
-TODO: Fill this README out!
-
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
+## Logic-Scaffolding for Personalized Recommendation Explanation Generation
+Working in progress. We will update the README file and edit the repository description on GitHub soon.
+  
 
 ## Security
 
