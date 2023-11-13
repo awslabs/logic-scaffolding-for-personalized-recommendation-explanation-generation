@@ -23,12 +23,9 @@ if(isset($_GET['item']) && isset($_GET['history']) && isset($_GET['model']) && i
                     if($result['model'] == $model){
                         if($result['finetune'] == $finetune){
                             if($result['ex'] == $ex){
-
-
                             $output = array('ex' => $result["ex"], 'evidence' => $result["evidence"]);
                             echo(json_encode($output));
                             break;
-
                             }
                         }
                     }
