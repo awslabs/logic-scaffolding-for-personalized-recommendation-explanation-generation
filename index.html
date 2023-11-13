@@ -7,14 +7,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Recommendation Evidence Generation Demo</title>
+  <title>Logic-Scaffolding for Personalized Recommendation Explanation Generation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"
     integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <style>
     body {
       margin: 0;
@@ -23,7 +21,6 @@
       height: 100vh;
       background-image: url('');
       background-size: cover;
-
     }
 
     .frosted-glass {
@@ -31,14 +28,14 @@
       width: 100%;
       height: 100vh;
       background: rgba(255, 255, 255, 0.2);
+      -webkit-backdrop-filter: blur(3.3rem);
       backdrop-filter: blur(3.3rem);
       filter: grayscale(0.8);
-
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
       -webkit-transform: translate3d(0, 0, 0);
       -moz-transform: translate3d(0, 0, 0);
-
+      background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
     }
 
     .content {
@@ -47,43 +44,33 @@
       left: 55%;
       transform: translate(-55%, -55%);
       z-index: 1;
-
     }
-
-
     .dropdown-menu {
       background-color: #21252925;
 
       position: absolute;
       overflow: auto;
       max-height: 50vh;
-
     }
-
     .dropdown-item {
       background-color: #21252925;
     }
-
     .dropdown-item> :hover {
       background-color: #ffffffdd;
       cursor: pointer;
     }
-
     .dropdown-item {
       max-height: 500px;
       ;
     }
-
     .dropdown-menu>li:hover {
       background-color: #21252925;
     }
-
     .one-line {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
     .four-line {
       line-height: 1.5em;
       height: 4em;
@@ -91,6 +78,11 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       width: 100%;
+    }
+    @media (max-width: 1300px) {
+      .frosted-glass {
+        height: 200vh;
+      }
     }
   </style>
 </head>
@@ -104,7 +96,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="images/logo.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
-        Recomendation Evidence Generation Demo
+        Logic-Scaffolding for Personalized Recommendation Explanation Generation
       </a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -131,19 +123,13 @@
   <div class="container-fluid grid content" style="z-index: 1;">
 
     <div class="row p-5" style="height: 100vh; min-height: 100vh;">
-
       <div class="col grid p-0 m-0 ">
-        <!-- Title  -->
         <div class="d-flex flex-row align-items-end m-3 " style="height: 50vh; min-width: 25%;">
-
           <div class="p-3 rounded-3 bg-dark bg-opacity-50" style="width: 100%;">
-
             <div class="d-flex w-100">
-              <h5 class="col-md-6 p-2 text-white d-flex justify-content-start w-50">Recommended &nbsp;<span
+              <h5 class="col-md-6 p-2 text-white d-flex justify-content-start w-50">Recommended&nbsp;<span
                   id="domain_name"></span></h5>
               <div class="p-2 text-white d-flex justify-content-end float-end w-50 ">
-
-                <!-- Dropdown start here -->
                 <div class="dropdown">
                   <button id="change_title" class="btn btn-success px-5 ms-5
                     dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -151,22 +137,12 @@
                     Select a different item
                   </button>
                   <ul id="select_item" class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
-
-
                   </ul>
-
-
                 </div>
-                <!-- dropdown ends here -->
               </div>
-
-
             </div>
-
             <img id="item_image" style="width: 100px; float: left;" class="mx-2 p-0 border border-2 border-white "
               src="">
-
-
             <h1 id="item_title" class="text-white mb-auto p-2"></h1>
             <span class="badge text-bg-primary">
               <h6 id="item_tag_1" class="p-0 m-0"></h6>
@@ -177,7 +153,6 @@
             <span class="badge text-bg-primary">
               <h6 id="item_tag_3" class="p-0 m-0"></h6>
             </span>
-
             <nav aria-label="breadcrumb" class="m-2">
               <ol class="breadcrumb text-white">
                 <li id="item_meta_1" class="breadcrumb-item"></li>
@@ -185,9 +160,7 @@
                 <li id="item_meta_3" class="breadcrumb-item"></li>
               </ol>
             </nav>
-
             <hr>
-
             <figure class="text-white p-3 mt-3 mb-0">
               <blockquote class="blockquote">
                 <p id="item_desc" class="lead small"></p>
@@ -197,96 +170,76 @@
               </figcaption>
             </figure>
           </div>
-
         </div>
 
-        <!-- Explanation -->
         <div class="row m-3 align-items-start">
-
-          <div class="container p-0">
+          <div class="container p-0" style="min-height: 72px;">
             <div class="p-4 text-left bg-dark bg-opacity-50 rounded-3">
-              <h4 class="text-white">Recommendation Evidence&nbsp;<span class="small fs-5 fw-light" id="usecase">(Example 1)</span></h4>
-
+              <h4 class="text-white">Recommendation Evidence&nbsp;<span class="small fs-5 fw-light"
+                  id="usecase">(Example 1)</span></h4>
               <p id="evidence_text" class=" col-md-12 text-white lead ">
-
               </p>
-
               <div class="row mt-1">
                 <button id="pos_feedback"
-                  class=" col-md-3 mx-2  align-items-left btn btn-sm btn-success btn-lg px-2 rounded-pill"
+                  class=" col-md-3 mx-2 mb-1  align-items-left btn btn-sm btn-success btn-lg px-2 rounded-pill"
                   type="button">
                   This is helpful 👍
                 </button>
-
                 <button id="neg_feedback"
                   class=" col-md-3 mx-2 align-items-left btn btn-sm btn-secondary btn-lg px-2 rounded-pill"
                   type="button">
                   Needs improvment
                 </button>
-
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col grid p-0 m-0">
-        <!-- Settings  -->
         <div class="d-flex flex-row align-items-end my-3 " style="height: 50vh; min-width: 25%; float: left;">
-
           <div class="container p-0">
             <div class="p-3 text-left bg-dark bg-opacity-50 rounded-3">
-
               <div class="d-flex w-100">
                 <h5 class="p-2 text-white d-flex justify-content-start w-50">User Interaction History</h5>
                 <div class="p-2 text-white d-flex justify-content-end float-end w-50"></div>
-
                 <h5 id="example" class="btn btn-sm btn-primary w-25 p-2 m-1">Try another example</h5>
               </div>
-
               <p class="text-white p-1 m-1">Relevant item from the user interaction history: This collection shows a
                 small subset of items from the user history that have the highest relevance to the recommended item.</p>
-<div class="row-fluid">
-              <div id="user_history" class="container-fluid d-inline-flex gap-2 mb-2 mt-2">
-
-                <div id="0" class="pop col-sm-2 text-center" data-toggle="popover">
-                  <img id="hist_image_1" style="width: 100px; height: 150px;"
-                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
-                  <p id="hist_title_1" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+              <div class="row-fluid">
+                <div id="user_history" class="container-fluid d-inline-flex gap-2 mb-2 mt-2">
+                  <div id="0" class="pop col-sm-2 text-center" data-toggle="popover">
+                    <img id="hist_image_1" style="width: 100px; height: 150px;"
+                      class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                    <p id="hist_title_1" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                  </div>
+                  <div id="1" class="pop col-sm-2 text-center" data-toggle="popover">
+                    <img id="hist_image_2" style="width: 100px; height: 150px; "
+                      class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                    <p id="hist_title_2" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                  </div>
+                  <div id="2" class="pop col-sm-2 text-center" data-toggle="popover">
+                    <img id="hist_image_3" style="width: 100px; height: 150px; "
+                      class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                    <p id="hist_title_3" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                  </div>
+                  <div id="3" class="pop col-sm-2 text-center" data-toggle="popover">
+                    <img id="hist_image_4" style="width: 100px; height: 150px; "
+                      class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                    <p id="hist_title_4" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                  </div>
+                  <div id="4" class="pop col-sm-2 text-center" data-toggle="popover">
+                    <img id="hist_image_5" style="width: 100px; height: 150px;"
+                      class="p-0 border border-2 border-white d-inline-flex text-center" src="">
+                    <p id="hist_title_5" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
+                  </div>
                 </div>
-
-                <div id="1" class="pop col-sm-2 text-center" data-toggle="popover">
-                  <img id="hist_image_2" style="width: 100px; height: 150px; "
-                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
-                  <p id="hist_title_2" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
-                </div>
-
-                <div id="2" class="pop col-sm-2 text-center" data-toggle="popover">
-                  <img id="hist_image_3" style="width: 100px; height: 150px; "
-                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
-                  <p id="hist_title_3" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
-                </div>
-
-                <div id="3" class="pop col-sm-2 text-center" data-toggle="popover">
-                  <img id="hist_image_4" style="width: 100px; height: 150px; "
-                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
-                  <p id="hist_title_4" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
-                </div>
-
-                <div id="4" class="pop col-sm-2 text-center" data-toggle="popover">
-                  <img id="hist_image_5" style="width: 100px; height: 150px;"
-                    class="p-0 border border-2 border-white d-inline-flex text-center" src="">
-                  <p id="hist_title_5" class="w-100 justify-content-center text-white text-center d-inline-flex"></p>
-                </div>
-
-              </div>
               </div>
               <p class="text-white m-0 p-0 small fw-light">ⓘ Learn how we find the most relevant items from the user
                 history.</p>
             </div>
           </div>
         </div>
-
-        <!-- Watch History -->
         <div class="d-flex flex-row  align-items-start " style="width: 100%;">
           <div class="p-3 rounded-3 bg-dark bg-opacity-50" style="width: 100%;">
             <h6 class="text-white">Explanation Settings</h6>
@@ -298,7 +251,8 @@
                   <li>
                     <a id="model" href="#"
                       class="model_select btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-0 px-0 lh-sm text-start">
-                      <img src="images/model.png" class="bi" width="48" height="48" style="background: rgba(255, 255, 255, 0.15);"></img>
+                      <img src="images/model.png" class="bi" width="48" height="48"
+                        style="background: rgba(255, 255, 255, 0.15);"></img>
                       <div>
                         <strong class="d-block text-white">Logic Scaffolding Model</strong>
                         <small>Falcon-40b : Technology Innovation Institute (TII)</small>
@@ -308,7 +262,8 @@
                   <li>
                     <a id="zero" href="#"
                       class="model_select btn btn-hover-light rounded-2 d-flex align-items-start gap-2 py-0 px-0 lh-sm text-start active">
-                      <img src="images/zero.png" class="bi" width="48" height="48" style="background: rgba(255, 255, 255, 0.15);"></img>
+                      <img src="images/zero.png" class="bi" width="48" height="48"
+                        style="background: rgba(255, 255, 255, 0.15);"></img>
                       <div>
                         <strong class="d-block">Zero-shot Model</strong>
                         <small>Falcon-40b : Technology Innovation Institute (TII)</small>
@@ -316,10 +271,6 @@
                     </a>
                   </li>
                 </ul>
-                <!-- <div class="form-check form-switch m-0 p-0 ms-5 ">
-                  <input class="form-check-input " type="checkbox" role="switch" id="finetune" checked >
-                  <label class="form-check-label" for="finetune">Fine-tuned model</label>
-                </div> -->
               </nav>
               <div class="d-none d-lg-block vr mx-4 opacity-10">&nbsp;</div>
               <hr class="d-lg-none">
@@ -330,32 +281,26 @@
                         class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Documentation</a>
                     </li>
                     <li><a href="#"
-                        class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Data Privacy</a></li>
+                        class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Data
+                        Privacy</a></li>
                     <li><a href="#"
                         class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">API
                         status</a></li>
                     <li><a href="#"
                         class="text-white link-offset-2 link-underline link-underline-opacity-50 link-underline-opacity-75-hover">Publication</a>
                     </li>
-
                   </ul>
                 </nav>
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
-
-
-
     </div>
     <nav class="navbar navbar-expand-sm bg-body-tertiary fixed-bottom" data-bs-theme="dark">
       <h5 class="text-white"></h5>
     </nav>
   </div>
-
   <div id="my_modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
     aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -364,8 +309,6 @@
       </div>
     </div>
   </div>
-
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
@@ -383,6 +326,13 @@
     </script>
 
   <script>
+
+$(window).on('load', function() {
+         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+             window.location.href = "mobile.html";
+         }
+        });
+
     options = window.localStorage;
 
     //basics
@@ -404,31 +354,6 @@
 
   <script>
 
-    // function typewriter(text) {
-    //   var i = 0;
-    //   var interval = setInterval(function() {
-    //     document.getElementById("evidence_text").innerHTML += text[i++];
-    //     if (i === text.length) {
-    //       clearInterval(interval);
-    //     }
-    //   }, 60);
-    // }
-
-    // function typewriter(text, speed = 50) {
-    //   let index = 0;
-    //   const outputElement = document.getElementById('evidence_text'); 
-    //   outputElement.innerHTML = ''; 
-
-    //   function type() {
-    //     if (index < text.length) {
-    //       outputElement.innerHTML += text.charAt(index);
-    //       index++;
-    //       setTimeout(type, speed);
-    //     }
-    //   }
-    //   type();
-    // }
-
     function typewriter(text, speed = 50) {
       let index = 0;
       const outputElement = document.getElementById('evidence_text'); // Change 'output' to your output element's ID
@@ -444,7 +369,6 @@
         }
       }, speed);
     }
-
 
 
     function load_items() {
@@ -478,12 +402,16 @@
           var desc = json_data[key].desc;
           var image = json_data[key].image;
 
+          list = ["Schindler's List","Pulp Fiction","The Shawshank Redemption","The Godfather","The Dark Knight"];
 
+          if (list.includes(title)){
+            console.log(title);
           var new_li = '<li class="dropdown-item" value="' + key + '"> <div class="card mb-1 col-md-12"> <div class="row g-0"> <div class="col-3 me-0"> <img src="' + image + '" class="img-fluid rounded-start" alt="..."> </div> <div class="col-md-8 mx-1"> <div class="card-body p-0 pt-1"> <h6 class="card-title text mb-1 one-line">' + title + '</h6> <p class="card-text text-truncate justify text-secondary fw-light lh-1  text-wrap small mb-1 four-line"> ' + desc + '</p> </div> </div> </div> </div> </li>';
 
           $('#select_item').append(new_li);
 
         }
+      }
       }
     }
 
@@ -493,25 +421,30 @@
       var id = options.getItem('id');
       var item = options.getItem('item');
       var history = '';
-      if(item == '1398018'){
+      if (item == '1398018') {
         history = '0253474,0118799,0120815,0114814,0169547';
-        options.setItem('history',history);
+        options.setItem('history', history);
       }
-      if(item == '2131456'){
+      if (item == '2131456') {
 
         history = '0137523,0208092,0109830,0066921,0118715';
-        options.setItem('history',history);
+        options.setItem('history', history);
       }
-      if(item == '0068646'){
+      if (item == '0068646') {
         history = '0086250,0099685,0113277,0112641,0042876';
-        options.setItem('history',history);
+        options.setItem('history', history);
       }
-      //var history = options.getItem('history'); 
+      if (item == '0111161') {
+        history = '0120689,0073486,0327056,0454921,0268978';
+        options.setItem('history', history);
+      }
+      if (item == '0468569') {
+        history = '0372784,1375666,0137523,0113277,0114369';
+        options.setItem('history', history);
+      }
 
-      console.log(item);
-      console.log(history);
 
-      
+
       var model = options.getItem('model');
       var finetune = options.getItem('finetune');
       var ex = options.getItem('ex');
@@ -534,6 +467,8 @@
           if (response != 0) {
 
             var json_data = JSON.parse(response);
+
+            console.log(json_data);
 
             var title = json_data.title;
             var desc = json_data.desc;
@@ -624,39 +559,56 @@
       }
     }
 
-    function update_evidence(item, history, model, finetune, ex) {
 
-      $('#evidence_text').text("");
-      //$('#evidence_text').removeClass('typewriter');
+    let typeWriterTimeout;
 
-      var url = './apis/evidence.php?item=' + item + '&history=' + history + '&model=' + model + '&finetune=' + finetune + '&domain=' + options.getItem('domain') + '&ex=' + ex ;
-      console.log(url);
-      $.ajax({
+function update_evidence(item, history, model, finetune, ex) {
+    // Assuming the triggering element is a button with the ID "myButton"
+    $("#myButton").prop("disabled", true);
+
+    $('#evidence_text').text("");
+
+    var url = './apis/evidence.php?item=' + item + '&history=' + history + '&model=' + model + '&finetune=' + finetune + '&domain=' + options.getItem('domain') + '&ex=' + ex;
+    console.log("url" + url);
+    $.ajax({
         url: url,
         type: 'post',
         async: false,
         success: function (response) {
-          if (response != 0) {
-
-            var json_data = JSON.parse(response);
-
-            $('#evidence_text').text("");
-            var evid = json_data['evidence'];
-            $('#evidence_text').html(evid);
-            $('#usecase').text("(Example "+ex+")");
-
-            $('#evidence_text').hide().fadeIn(500);
-
-            options.setItem("evidence", json_data['evidence']);
-            options.setItem("ex", json_data['ex']);
-
-          } else {
-            console.log("Error");
-            
-          }
+            if (response != 0) {
+                var json_data = JSON.parse(response);
+                var evid = json_data['evidence'];
+                typeWriter(evid).then(() => {
+                    $('#usecase').text("(Example " + ex + ")");
+                    options.setItem("evidence", json_data['evidence']);
+                    options.setItem("ex", json_data['ex']);
+                    $("#myButton").prop("disabled", false);
+                });
+            } else {
+                console.log("Error");
+                $("#myButton").prop("disabled", false);
+            }
         },
-      });
-    }
+    });
+}
+
+function typeWriter(text) {
+    return new Promise((resolve) => {
+        let i = 0;
+
+        function typeNextChar() {
+            if (i < text.length) {
+                $('#evidence_text').append(text.charAt(i));
+                i++;
+                typeWriterTimeout = setTimeout(typeNextChar, 30);
+            } else {
+                resolve();
+            }
+        }
+        clearTimeout(typeWriterTimeout);
+        typeNextChar();
+    });
+}
 
     function save_feedback(type) {
 
@@ -680,7 +632,6 @@
     function get_item_popup(id) {
 
       var history = options.getItem('history');
-      //console.log(history);
       hist_arr = history.split(',');
       item_id = hist_arr[id];
 
@@ -717,37 +668,17 @@
         load_with_data();
       });
 
-      // $(".pop").hover(function () {
-      //   //var desc = get_item_popup($(this).attr('id'));
-
-        
-      //   $('[data-toggle="popover"]').each(function () {
-      //   //alert(get_item_popup($(this).attr('id')));
-      //   $(this).popover({
-      //     placement: 'top',
-      //     trigger: 'hover',
-      //     html: true,
-      //     content: get_item_popup($(this).attr('id'))
-      //   });
-      // });
-
-      // });
-
-
-
-
-
       $("#example").click(function () {
         current = parseInt(options.getItem('ex'));
-        if(current <= 3){
-          options.setItem('ex', (current+1).toString() );
-        }else{
-          options.setItem('ex','1');
+        if (current <= 3) {
+          options.setItem('ex', (current + 1).toString());
+        } else {
+          options.setItem('ex', '1');
         }
         load_with_data();
       });
 
-      
+
 
       $('#finetune').change(function () {
         if ($(this).is(':checked')) {
